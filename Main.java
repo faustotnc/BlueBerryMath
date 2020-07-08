@@ -32,11 +32,12 @@ public class Main {
         System.out.println("The outliers: " + sample.outliers());
         System.out.println("The frequency: " + sample.frequency());
         System.out.println("The variance: " + sample.variance());
+        System.out.println("The Std. Deviation: " + sample.stdDeviation());
 
         System.out.println("\n=================================\n");
 
         // **** Other maths
-        System.out.println("Factorial of 10: " + Other.factorial(20));
+        System.out.println("Factorial of 10: " + Other.factorial(10));
         System.out.println("4 choose 2: " + Other.choose(4, 2));
     }
 }

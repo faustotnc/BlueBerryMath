@@ -109,7 +109,7 @@ public class Statistics {
      * @param population The population from which to calculate the variance.
      * @return The variance of the population
      */
-    public static double variance(double... population) {
+    public static double popVariance(double... population) {
         double pMean = mean(population);
         double sum = 0;
 
@@ -122,9 +122,48 @@ public class Statistics {
 
 
     /**
+     * Computes the variance of the sample (unbiased variance).
+     * As defined in Wikipedia, informally, variance is a measure of
+     * how far a set of numbers is spread out from their average value.
+     * @param sample The sample from which to calculate the variance.
+     * @return The variance of the sample.
+     */
+    public static double sampleVariance(double... sample) {
+        double pMean = mean(sample);
+        double sum = 0;
+
+        // Sum of the squared differences between the population
+        // mean and each element of the population.
+        for (double element: sample) sum += Math.pow(pMean - element, 2);
+
+        return sum / (sample.length - 1);
+    }
+
+
+    /**
+     * Calculates the standard deviation of a population.
+     * @param population The population from which to calculate the standard deviation.
+     * @return The standard deviation of a population.
+     */
+    public static double popStdDeviation(double... population) {
+        return Math.sqrt( popVariance(population) );
+    }
+
+
+    /**
+     * Calculates the (unbiased) standard deviation of a sample.
+     * @param sample The sample from which to calculate the standard deviation.
+     * @return The standard deviation of a sample.
+     */
+    public static double sampleStdDeviation(double... sample) {
+        return Math.sqrt( popVariance(sample) );
+    }
+
+
+    /**
      * Calculates the quartiles of a population.
      * @param population The population from which to calculate the quartiles.
-     * @return The quartiles of a population.
+     * @return A HashMap containing the quartiles (q1, q2, q3) of a population.
      */
     public static HashMap<String, Double> quartiles(double... population) {
         Arrays.sort(population);
@@ -170,7 +209,7 @@ public class Statistics {
     /**
      * Calculates the outliers of a population.
      * @param population The population from which to calculate the outliers.
-     * @return The outliers of a population.
+     * @return A list containing the outliers of a population.
      */
     public static List<Double> outliers(double... population) {
         List<Double> outList = new ArrayList<>();
@@ -213,30 +252,30 @@ public class Statistics {
         }
 
         /**
-         * Calculates the sum of a sample
-         * @return The sum of the sample
+         * Calculates the sum of a sample.
+         * @return The sum of the sample.
          */
         public double sum(double... population) { return Statistics.sum(this.sample); }
 
         /**
-         * Calculates the mean of a sample
-         * @return The mean of the population
+         * Calculates the mean of a sample.
+         * @return The mean of the population.
          */
         public double mean() {
             return Statistics.mean(this.sample);
         }
 
         /**
-         * Calculates the median of a sample
-         * @return The median of a population
+         * Calculates the median of a sample.
+         * @return The median of a population.
          */
         public double median() {
             return Statistics.median(this.sample);
         }
 
         /**
-         * Calculates the mode of a sample
-         * @return A list containing each element of the mode of the sample
+         * Calculates the mode of a sample.
+         * @return A list containing each element of the mode of the sample.
          */
         public List<Double> mode() { return Statistics.mode(this.sample); }
 
@@ -259,11 +298,17 @@ public class Statistics {
          * how far a set of numbers is spread out from their average value.
          * @return The variance of the sample.
          */
-        public double variance() { return Statistics.variance(this.sample); }
+        public double variance() { return Statistics.sampleVariance(this.sample); }
+
+        /**
+         * Calculates the (unbiased) standard deviation of a sample.
+         * @return The standard deviation of a sample.
+         */
+        public double stdDeviation() { return Statistics.sampleStdDeviation(this.sample); }
 
         /**
          * Calculates the quartiles of a sample.
-         * @return The quartiles of a sample.
+         * @return A HashMap containing the quartiles (q1, q2, q3) of a sample.
          */
         public HashMap<String, Double> quartiles() { return Statistics.quartiles(this.sample); }
 
@@ -275,7 +320,7 @@ public class Statistics {
 
         /**
          * Calculates the outliers of a sample.
-         * @return The outliers of a sample.
+         * @return A list containing the outliers of a sample.
          */
         public List<Double> outliers() { return Statistics.outliers(this.sample); }
     }

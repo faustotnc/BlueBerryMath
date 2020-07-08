@@ -8,7 +8,7 @@ public class Calculus {
      * Computes the instantaneous rate of change at x
      * using the slope of the tangent line that passes through
      * two points of the function f with h=0.0000000001.
-     * @param x The x-value at which the instantaneous rate of change will be calculates.
+     * @param x The x-value at which the instantaneous rate of change will be calculated.
      * @param f The function to calculate the instantaneous rate of change.
      * @return The instantaneous rate of change at x for the function f.
      */
@@ -41,7 +41,7 @@ public class Calculus {
         // Starting x-value
         double x = l;
 
-        // Calculates the total area of each trapezoid and
+        // Calculates the area of each trapezoid and
         // aggregates it to the total calculated area
         for (int i = 0; i <= h; i++) {
             area += ((f.apply(x) + f.apply(x + deltaX)) / 2) * deltaX;
