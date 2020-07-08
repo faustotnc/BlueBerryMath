@@ -1,4 +1,4 @@
-package BlueBerryMathLibrary;
+package BlueBerryMath;
 
 import java.util.*;
 
@@ -104,7 +104,7 @@ public class Statistics {
 
     /**
      * Computes the variance of the population.
-     * As defined in Wikipedia, informally, variance is measure of
+     * As defined in Wikipedia, informally, variance is a measure of
      * how far a set of numbers is spread out from their average value.
      * @param population The population from which to calculate the variance.
      * @return The variance of the population
@@ -113,8 +113,8 @@ public class Statistics {
         double pMean = mean(population);
         double sum = 0;
 
-        // Sum of the squared differences of the population
-        // mean, and each  element of the population.
+        // Sum of the squared differences between the population
+        // mean and each element of the population.
         for (double element: population) sum += Math.pow(pMean - element, 2);
 
         return sum / population.length;

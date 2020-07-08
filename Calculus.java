@@ -1,4 +1,4 @@
-package BlueBerryMathLibrary;
+package BlueBerryMath;
 
 import java.util.function.Function;
 
