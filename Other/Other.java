@@ -1,4 +1,4 @@
-package BlueBerryMath;
+package BlueBerryMath.Other;
 
 public class Other {
 

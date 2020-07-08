@@ -1,4 +1,4 @@
-package BlueBerryMath;
+package BlueBerryMath.Calculus;
 
 import java.util.function.Function;
 
