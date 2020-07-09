@@ -50,4 +50,50 @@ public class Calculus {
         }
         return area;
     }
+
+
+    /**
+     * Checks if a function is increasing on an interval [a, b].
+     * @param a The lower bound of the interval.
+     * @param b The upper bound of the interval.
+     * @param f The function to be tested.
+     * @return True if the function is monotone increasing on [a, b], false otherwise.
+     */
+    public static boolean isIncreasing(double a, double b, Function<Double, Double> f) {
+        double testN = b - a;
+        double currentTest = 0;
+
+        while (currentTest <= testN) {
+            // If the derivative is less than zero for any x in
+            // the interval [a, b], then the function would be decreasing,
+            // so we return false.
+            if (nDeriv(a + currentTest, f) < 0) return false;
+            currentTest += 1.0 / 300; // Performs 300 tests per unit distance
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Checks if a function is decreasing on an interval [a, b].
+     * @param a The lower bound of the interval.
+     * @param b The upper bound of the interval.
+     * @param f The function to be tested.
+     * @return True if the function is monotone decreasing on [a, b], false otherwise.
+     */
+    public static boolean isDecreasing(double a, double b, Function<Double, Double> f) {
+        double testN = b - a;
+        double currentTest = 0;
+
+        while (currentTest <= testN) {
+            // If the derivative is greater than zero for any x in
+            // the interval [a, b], then the function would be increasing,
+            // so we return false.
+            if (nDeriv(a + currentTest, f) > 0) return false;
+            currentTest += 1.0 / 300; // Performs 300 tests per unit distance
+        }
+
+        return true;
+    }
 }

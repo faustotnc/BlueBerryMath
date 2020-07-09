@@ -15,6 +15,10 @@ public class Main {
         // Calculates the integral of e^x from x=1, to x=6
         double integral = Calculus.fnInt(1, 6, Math::exp);
         System.out.println("Integral: " + integral);
+        // Checks if a function is increasing on an interval [a, b]
+        System.out.println("Is x^2 increasing on x=2 to x=3? " + Calculus.isIncreasing(2, 6, x -> Math.pow(x, 2)));
+        // Checks if a function is decreasing on an interval [a, b]
+        System.out.println("Is e^x decreasing on x=-3 to x=0? " + Calculus.isDecreasing(-3, 0, Math::exp));
 
         System.out.println("\n=================================\n");
 
@@ -33,6 +37,7 @@ public class Main {
         System.out.println("The frequency: " + sample.frequency());
         System.out.println("The variance: " + sample.variance());
         System.out.println("The Std. Deviation: " + sample.stdDeviation());
+        System.out.println("Probability of 12: " + sample.prob(12));
 
         System.out.println("\n=================================\n");
 

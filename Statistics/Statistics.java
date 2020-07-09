@@ -230,98 +230,12 @@ public class Statistics {
     }
 
 
-
-
-
     /**
-     * A collection of statistics functions that can
-     * be executed on a sample dataset.
+     * Makes the Statistics.Sample class available in the Statistics module.
      */
-    public static class Sample {
-        public double[] sample;
-        public double min;
-        public double max;
-
+    public static class Sample extends BlueBerryMath.Statistics.Sample {
         public Sample(double... sample_elements) {
-            Arrays.sort(sample_elements); // Sorts the elements from smallest to largest
-
-            // Property assignments
-            this.sample = sample_elements;
-            this.min = this.sample[0];
-            this.max = this.sample[this.sample.length - 1];
+            super(sample_elements);
         }
-
-        /**
-         * Calculates the sum of a sample.
-         * @return The sum of the sample.
-         */
-        public double sum(double... population) { return Statistics.sum(this.sample); }
-
-        /**
-         * Calculates the mean of a sample.
-         * @return The mean of the population.
-         */
-        public double mean() {
-            return Statistics.mean(this.sample);
-        }
-
-        /**
-         * Calculates the median of a sample.
-         * @return The median of a population.
-         */
-        public double median() {
-            return Statistics.median(this.sample);
-        }
-
-        /**
-         * Calculates the mode of a sample.
-         * @return A list containing each element of the mode of the sample.
-         */
-        public List<Double> mode() { return Statistics.mode(this.sample); }
-
-        /**
-         * Generates a frequency table in the form of a hash map
-         * with the frequency of the elements in the sample.
-         * @return A hash map containing the frequency of each element in the sample.
-         */
-        public HashMap<Double, Integer> frequency() { return Statistics.frequency(this.sample); }
-
-        /**
-         * Calculates the range of a sample.
-         * @return The range of the the sample.
-         */
-        public double range() { return Statistics.range(this.sample); }
-
-        /**
-         * Computes the variance of the sample.
-         * As defined in Wikipedia, informally, variance is measure of
-         * how far a set of numbers is spread out from their average value.
-         * @return The variance of the sample.
-         */
-        public double variance() { return Statistics.sampleVariance(this.sample); }
-
-        /**
-         * Calculates the (unbiased) standard deviation of a sample.
-         * @return The standard deviation of a sample.
-         */
-        public double stdDeviation() { return Statistics.sampleStdDeviation(this.sample); }
-
-        /**
-         * Calculates the quartiles of a sample.
-         * @return A HashMap containing the quartiles (q1, q2, q3) of a sample.
-         */
-        public HashMap<String, Double> quartiles() { return Statistics.quartiles(this.sample); }
-
-        /**
-         * Calculates the inner quartile range of a sample.
-         * @return The inner quartile range of a sample.
-         */
-        public double IQR() { return Statistics.IQR(this.sample); }
-
-        /**
-         * Calculates the outliers of a sample.
-         * @return A list containing the outliers of a sample.
-         */
-        public List<Double> outliers() { return Statistics.outliers(this.sample); }
     }
 }
