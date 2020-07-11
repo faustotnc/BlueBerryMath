@@ -30,7 +30,7 @@ class Sample {
 
     /**
      * Calculates the mean of a sample.
-     * @return The mean of the population.
+     * @return The mean of the sample.
      */
     public double mean() {
         return Statistics.mean(this.sample);
@@ -38,7 +38,7 @@ class Sample {
 
     /**
      * Calculates the median of a sample.
-     * @return The median of a population.
+     * @return The median of a sample.
      */
     public double median() {
         return Statistics.median(this.sample);
@@ -94,6 +94,7 @@ class Sample {
      * @return A list containing the outliers of a sample.
      */
     public List<Double> outliers() { return Statistics.outliers(this.sample); }
+
 
     /*
      * Calculates the probability of finding the element n in the sample.

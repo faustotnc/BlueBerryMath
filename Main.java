@@ -4,6 +4,7 @@ package BlueBerryMath;
 import BlueBerryMath.Calculus.*;
 import BlueBerryMath.Statistics.*;
 import BlueBerryMath.Other.*;
+import BlueBerryMath.LinAlg.*;
 
 
 public class Main {
@@ -38,6 +39,27 @@ public class Main {
         System.out.println("The variance: " + sample.variance());
         System.out.println("The Std. Deviation: " + sample.stdDeviation());
         System.out.println("Probability of 12: " + sample.prob(12));
+
+        System.out.println("\n=================================\n");
+
+        // **** Linear Algebra
+        Vect vector = new Vect(1, 4);
+        // Vectors
+        vector.print();
+        System.out.println("The vector's magnitude: " + vector.magnitude());
+        System.out.println("The vector's angle in radians: " + vector.angle());
+        System.out.print("Normalized Vector: "); vector.norm().print();
+        System.out.println("Dot products: " + vector.dot(new Vect(1, 2)));
+        System.out.print("Cross products: "); new Vect(1, 2, 3).cross(new Vect(1, 4, 5)).print();
+        // Matrices
+        double[][] myMatrix = {
+                {20, 1, 3.2},
+                {1, 4, 0},
+                {0, 10, 102}
+        };
+        Matrix matrix = new Matrix(myMatrix);
+        matrix.print();
+        matrix.RREF().print();
 
         System.out.println("\n=================================\n");
 

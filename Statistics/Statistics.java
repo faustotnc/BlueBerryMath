@@ -155,9 +155,7 @@ public class Statistics {
      * @param sample The sample from which to calculate the standard deviation.
      * @return The standard deviation of a sample.
      */
-    public static double sampleStdDeviation(double... sample) {
-        return Math.sqrt( popVariance(sample) );
-    }
+    public static double sampleStdDeviation(double... sample) { return Math.sqrt( sampleVariance(sample) ); }
 
 
     /**
