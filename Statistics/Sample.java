@@ -8,7 +8,7 @@ import java.util.List;
  * A collection of statistics functions that can
  * be executed on a sample dataset.
  */
-class Sample {
+public class Sample {
     public double[] sample;
     public double min;
     public double max;
@@ -26,14 +26,14 @@ class Sample {
      * Calculates the sum of a sample.
      * @return The sum of the sample.
      */
-    public double sum() { return Statistics.sum(this.sample); }
+    public double sum() { return Stats.sum(this.sample); }
 
     /**
      * Calculates the mean of a sample.
      * @return The mean of the sample.
      */
     public double mean() {
-        return Statistics.mean(this.sample);
+        return Stats.mean(this.sample);
     }
 
     /**
@@ -41,27 +41,27 @@ class Sample {
      * @return The median of a sample.
      */
     public double median() {
-        return Statistics.median(this.sample);
+        return Stats.median(this.sample);
     }
 
     /**
      * Calculates the mode of a sample.
      * @return A list containing each element of the mode of the sample.
      */
-    public List<Double> mode() { return Statistics.mode(this.sample); }
+    public List<Double> mode() { return Stats.mode(this.sample); }
 
     /**
      * Generates a frequency table in the form of a hash map
      * with the frequency of the elements in the sample.
      * @return A hash map containing the frequency of each element in the sample.
      */
-    public HashMap<Double, Integer> frequency() { return Statistics.frequency(this.sample); }
+    public HashMap<Double, Integer> frequency() { return Stats.frequency(this.sample); }
 
     /**
      * Calculates the range of a sample.
      * @return The range of the the sample.
      */
-    public double range() { return Statistics.range(this.sample); }
+    public double range() { return Stats.range(this.sample); }
 
     /**
      * Computes the variance of the sample.
@@ -69,31 +69,31 @@ class Sample {
      * how far a set of numbers is spread out from their average value.
      * @return The variance of the sample.
      */
-    public double variance() { return Statistics.sampleVariance(this.sample); }
+    public double variance() { return Stats.sampleVariance(this.sample); }
 
     /**
      * Calculates the (unbiased) standard deviation of a sample.
      * @return The standard deviation of a sample.
      */
-    public double stdDeviation() { return Statistics.sampleStdDeviation(this.sample); }
+    public double stdDeviation() { return Stats.sampleStdDeviation(this.sample); }
 
     /**
      * Calculates the quartiles of a sample.
      * @return A HashMap containing the quartiles (q1, q2, q3) of a sample.
      */
-    public HashMap<String, Double> quartiles() { return Statistics.quartiles(this.sample); }
+    public HashMap<String, Double> quartiles() { return Stats.quartiles(this.sample); }
 
     /**
      * Calculates the inner quartile range of a sample.
      * @return The inner quartile range of a sample.
      */
-    public double IQR() { return Statistics.IQR(this.sample); }
+    public double IQR() { return Stats.IQR(this.sample); }
 
     /**
      * Calculates the outliers of a sample.
      * @return A list containing the outliers of a sample.
      */
-    public List<Double> outliers() { return Statistics.outliers(this.sample); }
+    public List<Double> outliers() { return Stats.outliers(this.sample); }
 
 
     /*

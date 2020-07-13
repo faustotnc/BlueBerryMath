@@ -44,12 +44,12 @@ public class Main {
 
 ### Statistics
 ```java
-// Import all modules from the Statistics package.
+// Import all modules from the Stats package.
 import BlueBerryMath.Statistics.*;
 
 public class Main {
     public static void main(String[] args) {
-        Statistics.Sample sample = new Statistics.Sample(1, 2, 3, 3, 1, 1, 3, 6, 2, 1, 4);
+        Sample sample = new Sample(1, 2, 3, 3, 1, 1, 3, 6, 2, 1, 4);
         System.out.println("The average value is: " + sample.mean());
     }
 }

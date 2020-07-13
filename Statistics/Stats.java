@@ -3,7 +3,7 @@ package BlueBerryMath.Statistics;
 import java.util.*;
 
 
-public class Statistics {
+public class Stats {
 
     /**
      * Calculates the sum of a population
@@ -37,7 +37,7 @@ public class Statistics {
 
         if (population.length % 2 == 0) {
             // If the population is even, return the mean of the two central elements
-            return Statistics.mean(population[(population.length / 2) - 1], population[population.length / 2]);
+            return Stats.mean(population[(population.length / 2) - 1], population[population.length / 2]);
         } else {
             // If the population is odd, return the middle element
             return population[Math.round((float)(population.length / 2.0)) - 1];
@@ -55,7 +55,7 @@ public class Statistics {
 
         // Generates and sorts an ArrayList containing the
         // frequencies of each elements in the population.
-        HashMap<Double, Integer> frequency = Statistics.frequency(population);
+        HashMap<Double, Integer> frequency = Stats.frequency(population);
         List<Integer> els = new ArrayList<>(frequency.values());
         Collections.sort(els);
         int highest = els.get(els.size() - 1);
@@ -225,15 +225,5 @@ public class Statistics {
         }
 
         return outList;
-    }
-
-
-    /**
-     * Makes the Statistics.Sample class available in the Statistics module.
-     */
-    public static class Sample extends BlueBerryMath.Statistics.Sample {
-        public Sample(double... sample_elements) {
-            super(sample_elements);
-        }
     }
 }
