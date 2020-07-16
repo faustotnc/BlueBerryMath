@@ -3,7 +3,7 @@ package BlueBerryMath.LinAlg;
 import java.util.Arrays;
 import java.util.function.Function;
 
-public class Matrix {
+public class Matrix extends MatrixOperations {
     public double[][] matrix;
     public int rowCount;
     public int columnCount;
