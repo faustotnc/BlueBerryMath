@@ -75,7 +75,7 @@ public class Vect {
      */
     public Vect plus(Vect v) {
         double[] w = new double[dim()];
-        if (dimsMatch(v)) for (int i = 0; i < dim(); i++) w[i] = element(i) + v.vector[i];
+        if (dimsMatch(v)) for (int i = 0; i < dim(); i++) w[i] = getElement(i) + v.vector[i];
         return new Vect(w);
     }
 
@@ -87,7 +87,7 @@ public class Vect {
      */
     public Vect minus(Vect v) {
         double[] w = new double[dim()];
-        if (dimsMatch(v)) for (int i = 0; i < dim(); i++) w[i] = element(i) - v.vector[i];
+        if (dimsMatch(v)) for (int i = 0; i < dim(); i++) w[i] = getElement(i) - v.vector[i];
         return new Vect(w);
     }
 
@@ -99,7 +99,7 @@ public class Vect {
      */
     public Vect scale(double alpha) {
         double[] w = new double[dim()];
-        for (int i = 0; i < dim(); i++) w[i] = element(i) * alpha;
+        for (int i = 0; i < dim(); i++) w[i] = getElement(i) * alpha;
         return new Vect(w);
     }
 
@@ -111,7 +111,7 @@ public class Vect {
     public Vect norm() {
         double vMag = this.magnitude();
         double[] vNorm = new double[dim()];
-        for (int i = 0; i < dim(); i++) vNorm[i] = element(i) / vMag;
+        for (int i = 0; i < dim(); i++) vNorm[i] = getElement(i) / vMag;
         return new Vect(vNorm);
     }
 
@@ -126,7 +126,7 @@ public class Vect {
         double prod = 0;
         if (dimsMatch(v)) {
             for (int i = 0; i < dim(); i++) {
-                double el = element(i);
+                double el = getElement(i);
                 prod += el * v.vector[i];
             }
         }
@@ -156,7 +156,15 @@ public class Vect {
      * @param pos The position of the element to obtain.
      * @return The element of this vector at position pos.
      */
-    public double element(int pos) { return this.vector[pos]; }
+    public double getElement(int pos) { return this.vector[pos]; }
+
+
+    /**
+     * Sets the element of the vector at position <code>pos</code> to the value <code>newEl</code>.
+     * @param pos The position where to set the new element.
+     * @param newEl The new element to set at position <code>pos</code>.
+     */
+    public void setElement(int pos, double newEl) { this.vector[pos] = newEl; }
 
 
     /**
@@ -165,7 +173,7 @@ public class Vect {
      */
     public Matrix toColumn() {
         double[][] c = new double[this.dim()][1];
-        for (int i = 0; i < dim(); i++) c[i][0] = element(i);
+        for (int i = 0; i < dim(); i++) c[i][0] = getElement(i);
         return new Matrix(c);
     }
 
@@ -176,7 +184,7 @@ public class Vect {
      */
     public Matrix toRow() {
         double[][] c = new double[1][this.dim()];
-        for (int i = 0; i < dim(); i++) c[0][i] = element(i);
+        for (int i = 0; i < dim(); i++) c[0][i] = getElement(i);
         return new Matrix(c);
     }
 
@@ -188,7 +196,47 @@ public class Vect {
      */
     public Vect map(Function<Double, Double> f) {
         double[] V = new double[dim()];
-        for (int i = 0; i < dim(); i++) V[i] = f.apply(element(i));
+        for (int i = 0; i < dim(); i++) V[i] = f.apply(getElement(i));
         return new Vect(V);
+    }
+
+
+    /**
+     * Generates a vector of dimension <code>dim</code> with random elements between zero and one.
+     * @param dim The dimension of the vector.
+     * @return A new Vect whose elements are random doubles between zero and one.
+     */
+    public static Vect rand(int dim) {
+        double[] vectEls = new double[dim];
+        for (int i = 0; i < dim; i++) vectEls[i] = Math.random();
+        return new Vect(vectEls);
+    }
+
+
+    /**
+     * Generates a zero-vector of dimension <code>dim</code>.
+     * @param dim The dimension of the zero vector.
+     * @return A new Vect of dimension <code>dim</code> whose elements are all zeros.
+     */
+    public static Vect zeros(int dim) {
+        double[] vectEls = new double[dim];
+        for (int i = 0; i < dim; i++) vectEls[i] = 0;
+        return new Vect(vectEls);
+    }
+
+
+    /**
+     * Generates a one-hot vector.
+     * A one-hot vector is a vector whose elements are all zeros,
+     * except for one element with value of 1 at position x.
+     * @param dim The dimension of the vector.
+     * @param pos The position of the 1 in the one-hot vector.
+     * @return A new Vect whose elements are all zeros, except for the
+     * element at position <code>pos</code> with value of 1.
+     */
+    public static Vect oneHot(int dim, int pos) {
+        double[] vectEls = new double[dim];
+        for (int i = 0; i < dim; i++) vectEls[i] = (i == pos) ? 1 : 0;
+        return new Vect(vectEls);
     }
 }

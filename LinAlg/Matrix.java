@@ -3,7 +3,7 @@ package BlueBerryMath.LinAlg;
 import java.util.Arrays;
 import java.util.function.Function;
 
-public class Matrix extends MatrixOperations {
+public class Matrix {
     public double[][] matrix;
     public int rowCount;
     public int columnCount;
@@ -49,12 +49,24 @@ public class Matrix extends MatrixOperations {
 
 
     /**
+     * Generates the identity matrix of size s.
+     * @param s The size of the identity matrix
+     * @return The identity matrix of size s.
+     */
+    public static Matrix identity(int s) {
+        double[][] M = new double[s][s];
+        for (int i = 0; i < s; i++) for (int j = 0; j < s; j++) M[i][j] = (i == j) ? 1 : 0;
+        return new Matrix(M);
+    }
+
+
+    /**
      * Obtains the element of the mxn matrix at position i,j.
      * @param i The rwo position of the element.
      * @param j The column position of the element.
      * @return The element at position i,j.
      */
-    public double element(int i, int j) { return this.matrix[i][j]; }
+    public double getElement(int i, int j) { return this.matrix[i][j]; }
 
 
     /**
@@ -84,10 +96,10 @@ public class Matrix extends MatrixOperations {
             /* Find the k-th pivot: */
             int i_max = h;
             for (int i = h + 1; i < M.rowCount; i++) {
-                if (Math.abs(M.element(i, k)) > Math.abs(M.element(i_max, k))) i_max = i;
+                if (Math.abs(M.getElement(i, k)) > Math.abs(M.getElement(i_max, k))) i_max = i;
             }
 
-            if (M.element(i_max, k) == 0) {
+            if (M.getElement(i_max, k) == 0) {
                 /* No pivot in this column, pass to next column */
                 k = k + 1;
             } else {
@@ -96,13 +108,13 @@ public class Matrix extends MatrixOperations {
                 M.matrix[i_max] = M.matrix[h];
                 M.matrix[h] = temp;
 
-                double s = 1.0 / M.element(h, k);
+                double s = 1.0 / M.getElement(h, k);
                 for (i_max = 0; i_max < M.columnCount; i_max++) M.matrix[h][i_max] *= s;
                 for (int i = 0; i < M.rowCount; i++) {
                     if (i != h) {
-                        double t = M.element(i, k);
+                        double t = M.getElement(i, k);
                         for (i_max = 0; i_max < M.columnCount; i_max++) {
-                            M.matrix[i][i_max] -= t * M.element(h, i_max);
+                            M.matrix[i][i_max] -= t * M.getElement(h, i_max);
                         }
                     }
                 }
@@ -159,7 +171,7 @@ public class Matrix extends MatrixOperations {
 
         for (int i = 0; i < columnCount; i++) {
             for (int j = 0; j < rowCount; j++) {
-                M[i][j] = element(j, i);
+                M[i][j] = getElement(j, i);
             }
         }
 
@@ -182,7 +194,7 @@ public class Matrix extends MatrixOperations {
      */
     public Vect getColumn(int c) {
         double[] column = new double[rowCount];
-        for (int i = 0; i < rowCount; i++) column[i] = element(i, c);
+        for (int i = 0; i < rowCount; i++) column[i] = getElement(i, c);
         return new Vect(column);
     }
 
@@ -199,7 +211,7 @@ public class Matrix extends MatrixOperations {
 
         for (int i = 0; i < this.rowCount; i++) {
             for (int j = 0; j < this.columnCount + M.columnCount; j++) {
-                augM[i][j] = (j < this.columnCount) ? element(i, j) : M.element(i,j - this.columnCount);
+                augM[i][j] = (j < this.columnCount) ? getElement(i, j) : M.getElement(i,j - this.columnCount);
             }
         }
 
@@ -232,12 +244,12 @@ public class Matrix extends MatrixOperations {
         if (!isSquare) throw new Error("Matrix determinant cannot be computed because the matrix is not square.");
 
         if (rowCount == 2 && columnCount == 2) {
-            return (element(0, 0) * element(1, 1)) - (element(0, 1) * element(1, 0));
+            return (getElement(0, 0) * getElement(1, 1)) - (getElement(0, 1) * getElement(1, 0));
         }
 
         double determinant = 0;
         for (int j = 0; j < columnCount; j++) {
-            determinant += Math.pow(-1, j) * element(0, j) * subMatrix(0, j).det();
+            determinant += Math.pow(-1, j) * getElement(0, j) * subMatrix(0, j).det();
         }
         return determinant;
     }
@@ -263,7 +275,7 @@ public class Matrix extends MatrixOperations {
                 if (i != r && j != c) {
                     column = (j < c) ? j : j - 1;
 
-                    M[row][column] = element(i, j);
+                    M[row][column] = getElement(i, j);
                 }
             }
         }
@@ -301,7 +313,7 @@ public class Matrix extends MatrixOperations {
 
         for (int i = 0; i < MofCofactors.rowCount; i++) {
             for (int j = 0; j < MofCofactors.columnCount; j++) {
-                MofCofactors.matrix[i][j] = Math.pow(-1, i + j) * MofCofactors.element(i, j);
+                MofCofactors.matrix[i][j] = Math.pow(-1, i + j) * MofCofactors.getElement(i, j);
             }
         }
 
@@ -325,7 +337,77 @@ public class Matrix extends MatrixOperations {
      */
     public Matrix map(Function<Double, Double> f) {
         double[][] M = new double[rowCount][columnCount];
-        for (int i = 0; i < rowCount; i++) for (int j = 0; j < columnCount; j++) M[i][j] = f.apply(element(i, j));
+        for (int i = 0; i < rowCount; i++) for (int j = 0; j < columnCount; j++) M[i][j] = f.apply(getElement(i, j));
         return new Matrix(M);
+    }
+
+
+    /**
+     * Multiplies the matrices A and B.
+     * @param A The first matrix (on the left).
+     * @param B The second matrix (on the right).
+     * @return A new Matrix whose entries are the product of the matrices A and B.
+     * @throws Error If there is a mismatch between the sizes of the matrices.
+     */
+    public static Matrix multiply(Matrix A, Matrix B) {
+        if (A.columnCount != B.rowCount) {
+            String e = "Matrix size mismatch. Matrix A (size: " + A.rowCount + "x" + A.columnCount + ") " +
+                    "cannot be multiplied by Matrix B (size: " + B.rowCount + "x" + B.columnCount + ")";
+            throw new Error(e);
+        } else {
+            double[][] M = new double[A.rowCount][B.columnCount];
+            for (int i = 0; i < A.rowCount; i++) { // For each row of A
+                Vect currentVectorA = A.getRow(i);
+                for (int j = 0; j < B.columnCount; j++) { // For each column of B
+                    Vect currentVectorB = B.getColumn(j);
+                    // Calculate their dot-product, and place the result
+                    // in the appropriate position of the new matrix.
+                    M[i][j] = currentVectorA.dot(currentVectorB);
+                }
+            }
+            return new Matrix(M);
+        }
+    }
+
+
+    /**
+     * Multiplies the matrices.
+     * @param matrices A list of matrices to be multiplied.
+     * @return The product of all the matrices.
+     * @throws Error If there is a mismatch between the sizes of the matrices.
+     * @throws Error If there is only one matrix as argument.
+     */
+    public static Matrix multiply(Matrix... matrices) {
+        if (matrices.length <= 1) throw new Error("Matrix multiplication can only happen between 2 or more matrices.");
+
+        Matrix M = multiply(matrices[0], matrices[1]);
+        for (int i = 0; i < matrices.length - 2; i++) M = multiply(M, matrices[i + 2]);
+        return M;
+    }
+
+
+    /**
+     * Generates an <code>mxn</code> matrix with random elements between zero and one.
+     * @param m The number of rows.
+     * @param n The number of columns.
+     * @return A new Matrix whose elements are random doubles between zero and one.
+     */
+    public static Matrix rand(int m, int n) {
+        double[][] matrixEls = new double[m][n];
+        for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) matrixEls[i][j] = Math.random();
+        return new Matrix(matrixEls);
+    }
+
+
+    /**
+     * Generates an <code>mxn</code> zero-matrix.
+     * @param m The number of rows.
+     * @param n The number of columns.
+     * @return A new Matrix whose elements are all zeros.
+     */
+    public static Matrix zeros(int m, int n) {
+        double[][] matrixEls = new double[m][n];
+        for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) matrixEls[i][j] = 0;
+        return new Matrix(matrixEls);
     }
 }
