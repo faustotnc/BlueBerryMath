@@ -2,9 +2,17 @@ package BlueBerryMath.LinAlg;
 
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.Random;
 
 public class Vect {
     public double[] vector;
+    /** A seed for the random vector generation. */
+    public static long seed;
+
+    /**
+     * Creates an n-dimensional vector.
+     * @param elements The elements of the vector.
+     */
     public Vect(double... elements) { this.vector = elements; }
 
 
@@ -207,8 +215,10 @@ public class Vect {
      * @return A new Vect whose elements are random doubles between zero and one.
      */
     public static Vect rand(int dim) {
+        Random random = (seed != 0) ? new Random(seed) : new Random();
         double[] vectEls = new double[dim];
-        for (int i = 0; i < dim; i++) vectEls[i] = Math.random();
+
+        for (int i = 0; i < dim; i++) vectEls[i] = random.nextDouble();
         return new Vect(vectEls);
     }
 

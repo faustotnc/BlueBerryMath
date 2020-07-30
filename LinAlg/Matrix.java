@@ -2,12 +2,16 @@ package BlueBerryMath.LinAlg;
 
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.Random;
 
 public class Matrix {
     public double[][] matrix;
     public int rowCount;
     public int columnCount;
     public boolean isSquare;
+    /** A seed for the random matrix generation. */
+    public static long seed;
+
 
     /**
      * Creates an mxn matrix.
@@ -393,8 +397,10 @@ public class Matrix {
      * @return A new Matrix whose elements are random doubles between zero and one.
      */
     public static Matrix rand(int m, int n) {
+        Random random = (seed != 0) ? new Random(seed) : new Random();
         double[][] matrixEls = new double[m][n];
-        for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) matrixEls[i][j] = Math.random();
+
+        for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) matrixEls[i][j] = random.nextDouble();
         return new Matrix(matrixEls);
     }
 
@@ -410,4 +416,57 @@ public class Matrix {
         for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) matrixEls[i][j] = 0;
         return new Matrix(matrixEls);
     }
+
+
+    /**
+     * Computes the sparsity of the matrix.
+     * As defined by Wikipedia.org, a sparse matrix or sparse array is a matrix in which most of the elements are zero.
+     * @return A float representing the sparsity of the matrix.
+     */
+    public float sparsity() {
+        int zeroCount = 0;
+
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                if (getElement(i, j) == 0) zeroCount++;
+            }
+        }
+
+        return ((float) zeroCount / (rowCount * columnCount));
+    }
+
+
+    /**
+     * Computes whether a matrix is sparse.
+     * @return True if the sparsity of the matrix is greater than or equal to 0.5
+     */
+    public boolean isSparse() {  return sparsity() >= 0.5; }
+
+
+    /**
+     * Computes the density of the matrix.
+     * @return A float representing the density of the matrix.
+     */
+    public float density() { return 1 - sparsity(); }
+
+
+    /**
+     * Computes whether a matrix is dense.
+     * @return True if the density of the matrix is greater than or equal to 0.5
+     */
+    public boolean isDense() {  return density() >= 0.5; }
+
+
+    /**
+     * Determines whether the matrix is a column matrix or not.
+     * @return True if the matrix is a column matrix. False otherwise.
+     */
+    public boolean isColumn() { return columnCount == 1; }
+
+
+    /**
+     * Determines whether the matrix is a row matrix or not.
+     * @return True if the matrix is a row matrix. False otherwise.
+     */
+    public boolean isRow() { return rowCount == 1; }
 }
