@@ -1,5 +1,7 @@
 package BlueBerryMath.Other;
 
+import java.util.function.Function;
+
 public class Other {
 
     /**
@@ -25,4 +27,19 @@ public class Other {
 
         return factorial(n) / (factorial(k) * factorial(n - k));
     }
+
+
+    /**
+     * Adds the numbers defined by the sequence <code>s</code>.
+     * @param start The start of the sequence.
+     * @param end The end of the sequence (inclusive).
+     * @param s The sequence pattern.
+     * @return The sum of the sequence over the integers between <code>start</code> and <code>end</code>.
+     */
+    public static double sum(int start, int end, Function<Integer, Double> s) {
+        double c = 0;
+        for (int i = start; i <= end; i++) c += s.apply(i);
+        return c;
+    }
+
 }
