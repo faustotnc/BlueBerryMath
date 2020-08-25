@@ -1,26 +1,23 @@
-package BlueBerryMath.LinAlg;
+import { VectorCoords } from './VectorCoords';
+import { Matrix, make2dArray } from './Matrix';
 
-import java.util.Arrays;
-import java.util.function.Function;
-import java.util.Random;
-
-public class Vect {
-    public double[] vector;
+export class Vect {
+    public vector: number[];
     /** A seed for the random vector generation. */
-    public static long seed;
+    public static seed: number;
 
     /**
      * Creates an n-dimensional vector.
      * @param elements The elements of the vector.
      */
-    public Vect(double... elements) { this.vector = elements; }
+    constructor(...elements: number[]) { this.vector = elements; }
 
 
     /**
      * Prints out the vector to the console.
      */
-    public void print() {
-        System.out.println(Arrays.toString(this.vector));
+    public print(): void {
+        console.log(this.vector);
     }
 
 
@@ -28,9 +25,9 @@ public class Vect {
      * Calculates the magnitude of the vector
      * @return The magnitude of the vector
      */
-    public double magnitude() {
-        double mag = 0;
-        for (double element: this.vector) mag += Math.pow(element, 2);
+    public magnitude(): number {
+        let mag = 0;
+        for (let element of this.vector) mag += Math.pow(element, 2);
         return Math.sqrt(mag);
     }
 
@@ -39,8 +36,8 @@ public class Vect {
      * Calculates the angle of a 2-dimensional vector
      * @return The angle of a 2-dimensional vector
      */
-    public double angle() {
-        return (dim() == 2) ? Math.atan2(this.vector[1], this.vector[0]) : Double.NaN;
+    public angle(): number {
+        return (this.dim() === 2) ? Math.atan2(this.vector[1], this.vector[0]) : NaN;
     }
 
 
@@ -48,7 +45,7 @@ public class Vect {
      * Calculates the dimensions of the vector
      * @return The dimensions of the vector
      */
-    public int dim() {
+    public dim(): number {
         return this.vector.length;
     }
 
@@ -60,9 +57,9 @@ public class Vect {
      * @return True if the dimensions match.
      * @throws Error if the dimensions do not match.
      */
-    private boolean dimsMatch(Vect v) {
+    private dimsMatch(v: Vect): boolean {
         if (this.dim() != v.dim()) {
-            throw new Error("The dimensions of the vectors do not match. dim("+ this.dim() +") != " + "dim(" + v.dim() + ").");
+            throw new Error("The dimensions of the vectors do not match. dim(" + this.dim() + ") != " + "dim(" + v.dim() + ").");
         } else {
             return true;
         }
@@ -73,7 +70,7 @@ public class Vect {
      * Obtains the coordinates of the vector (for 2d and 3d vectors)
      * in different coordinate systems.
      */
-    public VectorCoords Coords = new VectorCoords(this);
+    public Coords = new VectorCoords(this);
 
 
     /**
@@ -81,10 +78,10 @@ public class Vect {
      * @param v The secondary vector to add to the current vector.
      * @return A new Vect with the sum of the added vectors.
      */
-    public Vect plus(Vect v) {
-        double[] w = new double[dim()];
-        if (dimsMatch(v)) for (int i = 0; i < dim(); i++) w[i] = getElement(i) + v.vector[i];
-        return new Vect(w);
+    public plus(v: Vect): Vect {
+        let w = new Array(this.dim());
+        if (this.dimsMatch(v)) for (let i = 0; i < this.dim(); i++) w[i] = this.getElement(i) + v.vector[i];
+        return new Vect(...w);
     }
 
 
@@ -93,10 +90,10 @@ public class Vect {
      * @param v The secondary vector to subtract from the current vector.
      * @return A new Vect with the subtraction of the vectors.
      */
-    public Vect minus(Vect v) {
-        double[] w = new double[dim()];
-        if (dimsMatch(v)) for (int i = 0; i < dim(); i++) w[i] = getElement(i) - v.vector[i];
-        return new Vect(w);
+    public minus(v: Vect): Vect {
+        let w = new Array(this.dim());
+        if (this.dimsMatch(v)) for (let i = 0; i < this.dim(); i++) w[i] = this.getElement(i) - v.vector[i];
+        return new Vect(...w);
     }
 
 
@@ -105,10 +102,10 @@ public class Vect {
      * @param alpha The quantity by which to scale the vector.
      * @return A new Vect as the scaled version of this vector.
      */
-    public Vect scale(double alpha) {
-        double[] w = new double[dim()];
-        for (int i = 0; i < dim(); i++) w[i] = getElement(i) * alpha;
-        return new Vect(w);
+    public scale(alpha: number): Vect {
+        let w = new Array(this.dim());
+        for (let i = 0; i < this.dim(); i++) w[i] = this.getElement(i) * alpha;
+        return new Vect(...w);
     }
 
 
@@ -116,11 +113,11 @@ public class Vect {
      * Generates a new Vect with the normalized form of the this vector.
      * @return A new Vect with the normalized form of the this vector.
      */
-    public Vect norm() {
-        double vMag = this.magnitude();
-        double[] vNorm = new double[dim()];
-        for (int i = 0; i < dim(); i++) vNorm[i] = getElement(i) / vMag;
-        return new Vect(vNorm);
+    public norm(): Vect {
+        let vMag = this.magnitude();
+        let vNorm = new Array(this.dim());;
+        for (let i = 0; i < this.dim(); i++) vNorm[i] = this.getElement(i) / vMag;
+        return new Vect(...vNorm);
     }
 
 
@@ -130,11 +127,11 @@ public class Vect {
      * @return The dot product of the two vectors.
      * @throws Error if the dimensions of the two vectors do not match.
      */
-    public double dot(Vect v) {
-        double prod = 0;
-        if (dimsMatch(v)) {
-            for (int i = 0; i < dim(); i++) {
-                double el = getElement(i);
+    public dot(v: Vect): number {
+        let prod = 0;
+        if (this.dimsMatch(v)) {
+            for (let i = 0; i < this.dim(); i++) {
+                let el = this.getElement(i);
                 prod += el * v.vector[i];
             }
         }
@@ -147,14 +144,14 @@ public class Vect {
      * @param v The secondary vector in R^3 to calculate the cross-product.
      * @return A new Vect in R^3 as the result of the cross-product of the two vectors.
      */
-    public Vect cross(Vect v) {
+    public cross(v: Vect): Vect {
         if (this.dim() != 3 || v.dim() != 3) {
             throw new Error("Vectors must form a subset of R^3.");
         } else {
-            double e1 = this.vector[1] * v.vector[2] - v.vector[1] * this.vector[2];
-            double e2 = this.vector[2] * v.vector[0] - v.vector[2] * this.vector[0];
-            double e3 = this.vector[0] * v.vector[1] - v.vector[0] * this.vector[1];
-            return new Vect(e1, e2, e3);
+            let e1 = this.vector[1] * v.vector[2] - v.vector[1] * this.vector[2];
+            let e2 = this.vector[2] * v.vector[0] - v.vector[2] * this.vector[0];
+            let e3 = this.vector[0] * v.vector[1] - v.vector[0] * this.vector[1];
+            return new Vect(...[e1, e2, e3]);
         }
     }
 
@@ -164,7 +161,7 @@ public class Vect {
      * @param pos The position of the element to obtain.
      * @return The element of this vector at position pos.
      */
-    public double getElement(int pos) { return this.vector[pos]; }
+    public getElement(pos: number): number { return this.vector[pos]; }
 
 
     /**
@@ -172,16 +169,16 @@ public class Vect {
      * @param pos The position where to set the new element.
      * @param newEl The new element to set at position <code>pos</code>.
      */
-    public void setElement(int pos, double newEl) { this.vector[pos] = newEl; }
+    public setElement(pos: number, newEl: number): void { this.vector[pos] = newEl; }
 
 
     /**
      * Converts the vector into a column vector (a matrix with one column and n rows).
      * @return A new Matrix with one column and n rows.
      */
-    public Matrix toColumn() {
-        double[][] c = new double[this.dim()][1];
-        for (int i = 0; i < dim(); i++) c[i][0] = getElement(i);
+    public toColumn(): Matrix {
+        let c: number[][] = make2dArray(this.dim(), 1);
+        for (let i = 0; i < this.dim(); i++) c[i][0] = this.getElement(i);
         return new Matrix(c);
     }
 
@@ -190,9 +187,9 @@ public class Vect {
      * Converts the vector into a row vector (a matrix with one row and n columns).
      * @return A new Matrix with one row and n columns.
      */
-    public Matrix toRow() {
-        double[][] c = new double[1][this.dim()];
-        for (int i = 0; i < dim(); i++) c[0][i] = getElement(i);
+    public toRow(): Matrix {
+        let c = make2dArray(1, this.dim());
+        for (let i = 0; i < this.dim(); i++) c[0][i] = this.getElement(i);
         return new Matrix(c);
     }
 
@@ -202,10 +199,10 @@ public class Vect {
      * @param f The mapping function to be applied to each element of this vector.
      * @return A new Vect whole elements are the mapped elements of this vector based on the mapping function f.
      */
-    public Vect map(Function<Double, Double> f) {
-        double[] V = new double[dim()];
-        for (int i = 0; i < dim(); i++) V[i] = f.apply(getElement(i));
-        return new Vect(V);
+    public map(f: (x: number) => number): Vect {
+        let V = new Array(this.dim());
+        for (let i = 0; i < this.dim(); i++) V[i] = f(this.getElement(i));
+        return new Vect(...V);
     }
 
 
@@ -214,12 +211,12 @@ public class Vect {
      * @param dim The dimension of the vector.
      * @return A new Vect whose elements are random doubles between zero and one.
      */
-    public static Vect rand(int dim) {
-        Random random = (seed != 0) ? new Random(seed) : new Random();
-        double[] vectEls = new double[dim];
+    public static rand(dim: number) {
+        // let random = (this.seed && this.seed !== 0) ? new Random(seed) : new Random();
+        let vectEls = new Array(dim);
 
-        for (int i = 0; i < dim; i++) vectEls[i] = random.nextDouble();
-        return new Vect(vectEls);
+        for (let i = 0; i < dim; i++) vectEls[i] = Math.random();
+        return new Vect(...vectEls);
     }
 
 
@@ -228,10 +225,10 @@ public class Vect {
      * @param dim The dimension of the zero vector.
      * @return A new Vect of dimension <code>dim</code> whose elements are all zeros.
      */
-    public static Vect zeros(int dim) {
-        double[] vectEls = new double[dim];
-        for (int i = 0; i < dim; i++) vectEls[i] = 0;
-        return new Vect(vectEls);
+    public static zeros(dim: number): Vect {
+        let vectEls = new Array(dim);
+        for (let i = 0; i < dim; i++) vectEls[i] = 0;
+        return new Vect(...vectEls);
     }
 
 
@@ -240,13 +237,13 @@ public class Vect {
      * A one-hot vector is a vector whose elements are all zeros,
      * except for one element with value of 1 at position x.
      * @param dim The dimension of the vector.
-     * @param pos The position of the 1 in the one-hot vector.
+     * @param hotPos The position of the 1 in the one-hot vector.
      * @return A new Vect whose elements are all zeros, except for the
      * element at position <code>pos</code> with value of 1.
      */
-    public static Vect oneHot(int dim, int pos) {
-        double[] vectEls = new double[dim];
-        for (int i = 0; i < dim; i++) vectEls[i] = (i == pos) ? 1 : 0;
-        return new Vect(vectEls);
+    public static oneHot(dim: number, hotPos: number): Vect {
+        let vectEls = new Array(dim);
+        for (let i = 0; i < dim; i++) vectEls[i] = (i === hotPos) ? 1 : 0;
+        return new Vect(...vectEls);
     }
 }
