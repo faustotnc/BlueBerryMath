@@ -89,20 +89,13 @@ export class Sample {
     public outliers() { return Stats.outliers(...this.sample); }
 
 
-    /**
-     * Calculates the probability of finding any element of the set eSet in the sample.
-     * @param eSet The set of expected values.
-     * @return The probability of finding any element of the set eSet in the sample.
-     */
-    public prob(...eSet: number[]): number;
-
     /*
      * Calculates the probability of finding the element n in the sample.
      * @param n The element expected element to be found in the sample.
      * @return The probability of finding the element n in the sample.
      */
-    public prob(n: number): number {
-        if (Array.isArray(n)) {
+    public prob(...n: number[]): number {
+        if (n.length > 1) {
             let totalProb = 0;
             // Adds up the probabilities of finding each of the elements
             // of the set individually.
@@ -110,7 +103,7 @@ export class Sample {
             return totalProb;
         } else {
             let nOfOccurrences = 0;
-            for (let element of this.sample) if (element === n) nOfOccurrences++;
+            for (let element of this.sample) if (element === n[0]) nOfOccurrences++;
             return nOfOccurrences / this.sample.length;
         }
     }
