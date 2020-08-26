@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/docs/blue.png"/ style="width: 375px; height: 375px">
+  <img src="/docs/blue-wide.png"/ style="width: 375px; height: 375px">
   </div>
 <div align="center">
   <h1>BlueBerryMath</h1>
