@@ -1,4 +1,4 @@
-package BlueBerryMath.LinAlg;
+package Java.LinAlg;
 
 import java.util.Arrays;
 import java.util.function.Function;

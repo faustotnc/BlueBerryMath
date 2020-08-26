@@ -1,4 +1,4 @@
-package BlueBerryMath.LinAlg;
+package Java.LinAlg;
 
 public class VectorCoords {
     private Vect vector;
