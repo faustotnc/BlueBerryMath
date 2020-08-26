@@ -11,7 +11,7 @@
   <strong>Open Source Math Packages</strong>
 </div>
 <div align="center">
-  BlueBerryMath aims to collect different algorithms for mathematical computation. Currently, BlueberryMath contains packages written in Java and Typescript, with modules for the topics of Calculus, Statistics, and Linear Algebra.
+  BlueBerryMath aims to collect different algorithms for mathematical computation. Currently, BlueberryMath contains packages written in Java, Typescript and Python, with modules for the topics of Calculus, Statistics, and Linear Algebra.
 </div>
 
 
@@ -29,10 +29,10 @@
 
 ## Features
 
-- **Documentation**:  Access to amazing documentation to understand all about MathBerryMath .
+- **Documentation**:  Access to amazing documentation to understand all about BlueBerryMath.
 
 
-- **Integration**:  MathBerryMath offer many programming language implementations, some of them are Java, TypeScript and Python.   
+- **Integration**:  BlueBerryMath offer many programming language implementations, some of which include Java, TypeScript and Python.   
 
 
 
@@ -43,10 +43,11 @@ Help us with a start! 🌟
 
 
 ## Installation
+The modules (classes) may be downloaded individually and incorporated into your own project as desired. Keep in mind that some of the modules depend on one another, in which case the required modules must be incorporated into your project as well.
 
 ## Contributing
 
-We love that others see our code and help us to improve it and be it better every day. Feel free to contribute our project sending you a pull request.
+We love that others find our code useful and want to help us improve it to make it better every day. Feel free to contribute to the project by submitting a pull request.
 
 ## License
 
