@@ -7,3 +7,6 @@ Statistics/Plot.java
 
 .DS_Store
 .vscode
+
+# Python Cache
+/Python/Calculus/__pycache__

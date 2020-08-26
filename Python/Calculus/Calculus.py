@@ -13,9 +13,9 @@ class Calculus():
     :return The instantaneous rate of change at x for the function f.
     '''
     @staticmethod
-    def nDeriv(x: float, f: float) -> float:
+    def nDeriv(x: float, f) -> float:
         h = 0.0000000001
-        return (f * (x + h) - f * (x - h)) / (2 * h)
+        return (f(x + h) - f(x - h)) / (2 * h)
 
     '''
       Computes the area under a curve in the xy-plane
@@ -27,7 +27,7 @@ class Calculus():
      '''
 
     @staticmethod
-    def fnInt(l: float, u: float, f: float) -> float:
+    def fnInt(l: float, u: float, f) -> float:
         if ((u - l) == 0):
             return 0
         # The number of trapezoids is dynamically
@@ -44,7 +44,7 @@ class Calculus():
         # aggregate it to the total calculated aggregate
         i = 0
         while i <= h:
-            area += (f * (x) + f * (x + deltax) / 2) * deltax
+            area += (f(x) + f(x + deltax) / 2) * deltax
             # The next x-value
             x += deltax
             i += 1
@@ -59,7 +59,7 @@ class Calculus():
     '''
 
     @staticmethod
-    def isIncreasing(a: float, b: float, f: float) -> bool:
+    def isIncreasing(a: float, b: float, f) -> bool:
         testN = b - a
         currentTest = 0
 
@@ -80,7 +80,7 @@ class Calculus():
       return: True if the function is monotone decreasing on [a, b], false otherwise.
      '''
     @staticmethod
-    def isDecreasing(a: float, b: float, f: float) -> bool:
+    def isDecreasing(a: float, b: float, f) -> bool:
         testN = b - a
         currentTest = 0
 
