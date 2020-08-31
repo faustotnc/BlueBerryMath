@@ -34,8 +34,9 @@ public class Calculus {
 
         // The number of trapezoids is dynamically
         // adjusted based on the size of the interval
-        // with a minimum of 10,000 trapezoids
-        long h = Math.round((100000 * (u - l)) + 10000);
+        // with a minimum of 10,000 trapezoids, and increases by
+        // 10,000 trapezoids per unit distance.
+        long h = Math.round((10000 * (u - l)) + 10000);
         // Total Computed Area
         double area = 0;
         // Change in x
@@ -46,6 +47,38 @@ public class Calculus {
         // Calculates the area of each trapezoid and
         // aggregates it to the total calculated area
         for (int i = 0; i <= h; i++) {
+            area += ((f.apply(x) + f.apply(x + deltaX)) / 2) * deltaX;
+            // The next x-value
+            x += deltaX;
+        }
+        return area;
+    }
+
+    /**
+     * Computes the area under a curve in the xy-plane using the method of
+     * trapezoidal approximation.
+     * 
+     * @param l The lower limit of the integral
+     * @param u The upper limit of the integral
+     * @param f The function whose area will be approximated
+     * @param n The number of trapezoids
+     * @return The approximate area under the curve f from x=l to x=u
+     */
+    public static double fnInt(double l, double u, Function<Double, Double> f, int n) {
+        // Returns zero is the size of the interval is zero
+        if ((u - l) == 0)
+            return 0;
+
+        // Total Computed Area
+        double area = 0;
+        // Change in x
+        double deltaX = (u - l) / n;
+        // Starting x-value
+        double x = l;
+
+        // Calculates the area of each trapezoid and
+        // aggregates it to the total calculated area
+        for (int i = 0; i <= n; i++) {
             area += ((f.apply(x) + f.apply(x + deltaX)) / 2) * deltaX;
             // The next x-value
             x += deltaX;
