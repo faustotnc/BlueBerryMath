@@ -13,4 +13,5 @@ Statistics/Plot.java
 # pip package
 /Python/blueberrymath.egg-info/
 /Python/dist/
+/Python/build/
 /Python/blueberrymath.tar.gz.asc
