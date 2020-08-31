@@ -1,4 +1,4 @@
-package BlueBerryMath.Statistics;
+package Java.Statistics;
 
 import java.util.*;
 

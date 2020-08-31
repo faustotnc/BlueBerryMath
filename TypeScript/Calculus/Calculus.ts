@@ -24,14 +24,14 @@ export class Calculus {
      * @param f The function whose area will be approximated
      * @return The approximate area under the curve f from x=l to x=u
      */
-    public static fnInt(l: number, u: number, f: (x: number) => number): number {
+    public static fnInt(l: number, u: number, f: (x: number) => number, n?: number): number {
         // Returns zero is the size of the interval is zero
         if ((u - l) === 0) return 0;
 
         // The number of trapezoids is dynamically
         // adjusted based on the size of the interval
         // with a minimum of 10,000 trapezoids
-        const h = Math.round((100000 * (u - l)) + 10000);
+        const h = (!n) ? Math.round((10000 * (u - l)) + 10000) : n;
         // Total Computed Area
         let area = 0;
         // Change in x
