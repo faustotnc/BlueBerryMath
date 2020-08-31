@@ -1,3 +1,4 @@
+
 # Files that do not need to be uplodaded
 Main.java
 
@@ -7,3 +8,10 @@ Statistics/Plot.java
 
 .DS_Store
 .vscode
+
+# Python Cache
+/Python/blueberrymath/__pycache__
+# pip package
+/Python/blueberrymath.egg-info/
+/Python/dist/
+/Python/blueberrymath.tar.gz.asc
