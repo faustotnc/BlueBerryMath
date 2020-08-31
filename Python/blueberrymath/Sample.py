@@ -1,18 +1,20 @@
 from typing import *
 from Stats import Stats
 
+
 class Sample():
     def __init__(self, sample_elements):
         sample_elements = sort(sample_elements)
-        #Property assigments
+        # Property assigments
         self.sample = sample_elements
         self.min = self.sample[0]
-        self.max = self.sample[len(self.sample) -1]
+        self.max = self.sample[len(self.sample) - 1]
 
         '''
         Calculates the sum of a sample
         :return The sum of the sample
         '''
+
     def sum(self):
         return Stats.sum(self.sample)
 
@@ -20,6 +22,7 @@ class Sample():
         Calculates the mean of a sample.
         :return The mean of the sample
         '''
+
     def mean(self):
         return Stats.mean(self.sample)
 
@@ -27,6 +30,7 @@ class Sample():
         Calulates the median of a sample
         :return The median of a sample
         '''
+
     def median(self):
         return Stats.median(self.sample)
 
@@ -34,6 +38,7 @@ class Sample():
         Calculates the mode of a sample
         :return A list containing each element of the mode of the sample
         '''
+
     def mode(self):
         return Stats.mode(self.sample)
 
@@ -42,13 +47,15 @@ class Sample():
         with the frecuency of the elements in the sample
         :return A hash map containing the frecuency of each element in the sample
         '''
-    def frecuency(self):
+
+    def frequency(self):
         return Stats.frecuency(self.sample)
 
         '''
         Calculates the range of a sample
         :return The range pf the sample
         '''
+
     def range(self):
         return Stats.range(self.sample)
 
@@ -58,6 +65,7 @@ class Sample():
         how far a set of numbers is spread out from their avarage value
         :return The variance of the sample
         '''
+
     def variance(self):
         return Stats.variance(self.sample)
 
@@ -67,7 +75,7 @@ class Sample():
         '''
 
     def stdDerivation(self):
-        return Statas.sampleStdDerivation(self.sample)
+        return Stats.sampleStdDerivation(self.sample)
 
         '''
         Calulates the quartiles of a sample.
@@ -111,5 +119,5 @@ class Sample():
             nOfCurrences = 0
             for element in self.sample:
                 if element == n[0]:
-                    nOfCurrences+=1
+                    nOfCurrences += 1
             return nOfCurrences / len(self.sample)

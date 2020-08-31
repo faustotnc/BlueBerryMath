@@ -40,10 +40,10 @@ class Matrix:
         self.columnCount = len(self.matrix[0])
         self.isSquare = self.rowCount == self.columnCount
 
-    def colunmCount(self):
+    def columnCount(self):
         return self.columnCount
 
-    def show(self) -> None:
+    def print(self) -> None:
         print(self.matrix)
 
         '''
@@ -194,7 +194,7 @@ class Matrix:
     :return A new Matrix whose elements are the augmentation of this matrix and the matrix M.
     '''
 
-    def augement(self, M: callable) -> callable:
+    def augment(self, M: callable) -> callable:
         if self.rowCount != M.rowCount:
             print("Matrices must contai the same number of rows.")
             raise NameError("Error: Matrix row number error")
@@ -268,7 +268,7 @@ class Matrix:
       :return A new Matrix whose elements are the elements of the matrix of minors for this matrix.
     '''
 
-    def mirorsMatrix(self) -> callable:
+    def minorsMatrix(self) -> callable:
         if self.isSquare == False:
             print(
                 "Matrix inverse cannot be computed because the matrix is not square")

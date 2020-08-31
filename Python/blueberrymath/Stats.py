@@ -73,7 +73,7 @@ class Stats():
      '''
 
     @staticmethod
-    def frecuency(population: list()):
+    def frequency(population: list()):
         freq = {}
         for i in population:
             if freq.get(i) != None:
@@ -144,7 +144,7 @@ class Stats():
       :return The standard deviation of a sample.
      '''
     @staticmethod
-    def sampleStdDerivation(sample: list()) -> int:
+    def sampleStdDeviation(sample: list()) -> int:
         return math.sqrt(Stats().sampleVariance(sample))
 
     '''

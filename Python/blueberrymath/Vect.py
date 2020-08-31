@@ -20,8 +20,9 @@ class Vect():
         Prints out the vector to the terminal
         '''
 
-    def show(self) -> None:
+    def print(self) -> None:
         print(self.vector)
+
     '''
       Calculates the magnitude of the vector
       :return The magnitude of the vector
@@ -240,6 +241,3 @@ class Vect():
             else:
                 vectEls[i] = 0
         return Vect(vectEls)
-
-
-print(Vect([1, 2]).Coords().toPolar())
