@@ -1,7 +1,7 @@
 from typing import *
 import math
 import random
-# from VectorCoords import VectorCoords
+from VectorCoords import VectorCoords
 
 
 class Vect():

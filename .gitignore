@@ -1,3 +1,4 @@
+
 # Files that do not need to be uplodaded
 Main.java
 
@@ -13,5 +14,8 @@ Statistics/Plot.java
 # pip package
 /Python/blueberrymath.egg-info/
 /Python/dist/
+<<<<<<< HEAD
 /Python/build/
+=======
+>>>>>>> delete Calculus and Stats.py
 /Python/blueberrymath.tar.gz.asc
