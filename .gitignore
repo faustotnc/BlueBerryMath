@@ -9,5 +9,9 @@ Statistics/Plot.java
 .vscode
 
 # Python Cache
-/Python/Calculus/__pycache__
-/Python/LinAlg/__pycache__
+/Python/blueberrymath/__pycache__
+# pip package
+/Python/blueberrymath.egg-info/
+/Python/dist/
+/Python/build/
+/Python/blueberrymath.tar.gz.asc
