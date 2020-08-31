@@ -31,6 +31,7 @@
 
 - **Documentation**:  Access to amazing documentation to understand all about MathBerryMath .
 
+
 - **Integration**:  MathBerryMath offer many programming language implementations, some of them are Java, TypeScript and Python.   
 
 
